@@ -10,6 +10,12 @@
 <img src = "img/Снимок экрана 2023-08-11 в 14.31.40.png" width = 100%>
 
 2. Текст использованных команд в GitHub
+   Не очень понял задание, какие команды тут нужны? Команды которые использовались на машине для выполнения задания или команды для работы с Git'ом?
+```git
+   git add
+   git commit -m
+   git push origin
+```
 ```bash
    98 sudo apt update
    99  sudo apt install postgresql
