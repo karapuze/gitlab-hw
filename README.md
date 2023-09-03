@@ -16,31 +16,41 @@
 
 ### Задание 2
 
-Установите Zabbix Agent на два хоста.
+На проверку отправьте получившейся bash-скрипт и конфигурационный файл keepalived, а также скриншот с демонстрацией переезда плавающего ip на другой сервер в случае недоступности порта или файла index.html
 
-1. Приложите в файл README.md скриншот раздела Configuration > Hosts, где видно, что агенты подключены к серверу
-<img src = "img/Снимок экрана 2023-08-11 в 16.14.30.png" width = 100%>
-
-2. Приложите в файл README.md скриншот лога zabbix agent, где видно, что он работает с сервером
-
-   
-В данном задании столкнулся с проблемой, как видно агент подключен и отдает данные серверу, однако в логах агента не видно информации о подключении
-<img src = "img/Снимок экрана 2023-08-11 в 16.46.21.png" width = 100%>
-
-4. Приложите в файл README.md скриншот раздела Monitoring > Latest data для обоих хостов, где видны поступающие от агентов данные.
-<img src = "img/Снимок экрана 2023-08-11 в 16.46.41.png" width = 100%>
-
-5. Приложите в файл README.md текст использованных команд в GitHub
-   Опять не понял какие команды нужны
+1. bash скрипт
 ```bash
-wget https://repo.zabbix.com/zabbix/6.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.4-1+ubuntu22.04_all.deb
-sudo dpkg -i zabbix-release_6.4-1+ubuntu22.04_all.deb
-sudo apt update
-sudo apt install zabbix-agent
-sudo systemctl restart zabbix-agent
-sudo systemctl enable zabbix-agent
-sudo vim /etc/zabbix/zabbix_agentd.conf
-sudo systemctl restart zabbix-agent
-sudo cat /var/log/zabbix/zabbix_agentd.log 
-```   
+#!/bin/bash
+if [ -e /var/www/html/index.nginx-debian.html ] && nc -w 1 10.211.55.8 80
+then
+echo "done"
+exit 0
+else
+echo "nedone"	
+exit 1
+fi
+```
 
+2. конфигурационный файл keepalived
+```
+vrrp_script check_port {
+	script "/home/parallels/script"
+	interval 3
+}
+vrrp_instance VI_1 {
+        state MASTER
+        interface enp0s5
+        virtual_router_id 15
+        priority 255
+        advert_int 1
+
+        virtual_ipaddress {
+              10.211.55.100/24
+        }
+	track_script {
+		check_port
+	}
+}
+```
+3. Скриншот переезда
+<img src = "img/Снимок экрана 2023-09-03 в 19.55.09.png" width = 100%>
