@@ -19,7 +19,7 @@
 	Установите и запустите memcached.
  	Приведите скриншот systemctl status memcached, где будет видно, что memcached запущен.
 
-![alt text]([https://github.com/username/reponame/blob/branch/path/image.png](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202023-10-12%20в%2015.57.38.png))
+![Скриншот-1](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202023-09-19%20в%2008.55.59.png)
 
 
 ---
