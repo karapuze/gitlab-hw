@@ -11,12 +11,12 @@
 
 ---
 
-### Задание 2. Memcached
+### Задание 2. Kibana
 
-	Установите и запустите memcached.
- 	Приведите скриншот systemctl status memcached, где будет видно, что memcached запущен.
+	Установите и запустите Kibana.
+ 	Приведите скриншот интерфейса Kibana на странице http://<ip вашего сервера>:5601/app/dev_tools#/console, где будет выполнен запрос GET /_cluster/health?pretty.
 
-![Скриншот-1](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202023-10-12%20в%2015.57.38.png)
+![Скриншот-1](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202023-10-15%20в%2011.34.50.png)
 
 
 ---
