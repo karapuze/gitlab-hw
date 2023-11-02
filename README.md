@@ -41,18 +41,37 @@ show tables from sakila;
 ```
 ![Скриншот-1](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202023-11-01%20в%2014.28.56.png)
 
-	Установите и запустите Elasticsearch, после чего поменяйте параметр cluster_name на случайный.
-	Приведите скриншот команды 'curl -X GET 'localhost:9200/_cluster/health?pretty', сделанной на сервере с установленным Elasticsearch. Где будет виден нестандартный cluster_name.
-
-
-
+	
 
 ---
 
-### Задание 2. Kibana
+### Задание 2. 
 
-	Установите и запустите Kibana.
- 	Приведите скриншот интерфейса Kibana на странице http://<ip вашего сервера>:5601/app/dev_tools#/console, где будет выполнен запрос GET /_cluster/health?pretty.
+Составьте таблицу, используя любой текстовый редактор или Excel, в которой должно быть два столбца: в первом должны быть названия таблиц восстановленной базы, во втором названия первичных ключей этих таблиц.
+
+```
+ TABLE_NAME    	 COLUMN_NAME  
+ actor         	 actor_id     
+ address       	 address_id   
+ category      	 category_id  
+ city          	 city_id      
+ country       	 country_id   
+ customer      	 customer_id  
+ film          	 film_id      
+ film_actor    	 actor_id     
+ film_actor    	 film_id      
+ film_category 	 category_id  
+ film_category 	 film_id      
+ film_text     	 film_id      
+ inventory     	 inventory_id 
+ language      	 language_id  
+ payment       	 payment_id   
+ rental        	 rental_id    
+ staff         	 staff_id     
+ store         	 store_id
+![image](https://github.com/karapuze/gitlab-hw/assets/37789723/4781481d-eb7a-4915-b385-f96a73e6f7a9)
+
+```
 
 ![Скриншот-1](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202023-10-15%20в%2011.34.50.png)
 
