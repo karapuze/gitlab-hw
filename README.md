@@ -17,11 +17,34 @@ SELECT User,Host FROM mysql.user;
 ```
 ![Скриншот-1](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202023-11-01%20в%2010.40.42.png)
 
+1.4. Дайте все права для пользователя sys_temp.
+```
+grant all privileges on *.* to 'sys_temp'@'localhost';
+```
+1.5. Выполните запрос на получение списка прав для пользователя sys_temp.
+```
+show grants for 'sys_temp'@'localhost';
+```
+![Скриншот-1](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202023-11-01%20в%2010.48.54.png)
+
+1.6. Переподключитесь к базе данных от имени sys_temp.
+```
+mysql -u sys_temp -p
+```
+1.7. Восстановите дамп в базу данных.
+```
+sudo mysql db -uroot -p < /home/parallels/sakila-db/sakila-schema.sql sudo mysql db -uroot -p < /home/parallels/sakila-db/sakila-data.sql
+```
+1.8. При работе в IDE сформируйте ER-диаграмму получившейся базы данных. При работе в командной строке используйте команду для получения всех таблиц базы данных.
+```
+show tables from sakila;
+```
+![Скриншот-1](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202023-11-01%20в%2014.28.56.png)
 
 	Установите и запустите Elasticsearch, после чего поменяйте параметр cluster_name на случайный.
 	Приведите скриншот команды 'curl -X GET 'localhost:9200/_cluster/health?pretty', сделанной на сервере с установленным Elasticsearch. Где будет виден нестандартный cluster_name.
 
-![Скриншот-1](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202023-10-15%20в%2011.01.01.png)
+
 
 
 ---
