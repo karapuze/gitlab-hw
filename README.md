@@ -7,7 +7,7 @@
 Получите уникальные названия районов из таблицы с адресами, которые начинаются на “K” и заканчиваются на “a” и не содержат пробелов.
 
 ```
-SELECT district FROM address
+SELECT DISTINCT district FROM address
 WHERE district LIKE 'K%' AND district LIKE '_%a' AND district NOT LIKE '% %';
 ```
 
@@ -37,7 +37,7 @@ SELECT * FROM `rental` ORDER BY `rental_date` DESC LIMIT 5;
 замените буквы 'll' в именах на 'pp'.
 
 ```
-SELECT LOWER(REPLACE(first_name,'LL','pp')) FROM customer WHERE (first_name='kelly' OR first_name='willie') AND active ='1';
+SELECT LOWER(REPLACE(first_name,'LL','pp')) , LOWER(REPLACE(last_name,'LL','pp'))  FROM customer WHERE (first_name='kelly' OR first_name='willie') AND active ='1';
 ```
 
 
