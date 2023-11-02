@@ -69,32 +69,10 @@ show tables from sakila;
  rental        	 rental_id    
  staff         	 staff_id     
  store         	 store_id
-![image](https://github.com/karapuze/gitlab-hw/assets/37789723/4781481d-eb7a-4915-b385-f96a73e6f7a9)
+
 
 ```
 
-![Скриншот-1](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202023-10-15%20в%2011.34.50.png)
-
-
----
-
-### Задание 3. Logstash
-
-	Установите и запустите Logstash и Nginx. С помощью Logstash отправьте access-лог Nginx в Elasticsearch.
- 	Приведите скриншот интерфейса Kibana, на котором видны логи Nginx.
-
-
-![Скриншот-1](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202023-10-15%20в%2015.37.39.png)
-
-
----
-
-### Задание 4. Filebeat
-
-	Установите и запустите Filebeat. Переключите поставку логов Nginx с Logstash на Filebeat.
- 	Приведите скриншот интерфейса Kibana, на котором видны логи Nginx, которые были отправлены через Filebeat.
-
-![Скриншот-1](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202023-10-17%20в%2012.17.46.png)
 
 
  
