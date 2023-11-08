@@ -1,44 +1,58 @@
-# Домашнее задание к занятию «SQL. Часть 1»- `Натетков Александр`
+# Домашнее задание к занятию «SQL. Часть 2» - `Натетков Александр`
 
 
 
 ### Задание 1. 
 
-Получите уникальные названия районов из таблицы с адресами, которые начинаются на “K” и заканчиваются на “a” и не содержат пробелов.
+Одним запросом получите информацию о магазине, в котором обслуживается более 300 покупателей, и выведите в результат следующую информацию:
+
+ - фамилия и имя сотрудника из этого магазина;
+ - город нахождения магазина;
+ - количество пользователей, закреплённых в этом магазине.
 
 ```
-SELECT DISTINCT district FROM address
-WHERE district LIKE 'K%' AND district LIKE '_%a' AND district NOT LIKE '% %';
+SELECT COUNT(*) AS customers_count, stf.first_name, stf.last_name, ci.city
+FROM customer c
+JOIN store s ON c.store_id = s.store_id
+JOIN staff stf ON s.manager_staff_id = stf.staff_id
+JOIN address a ON s.address_id = a.address_id
+JOIN city ci ON a.city_id = ci.city_id
+GROUP BY c.store_id
+HAVING customers_count > 300;
+
 ```
 
 ### Задание 2.
 
-Получите из таблицы платежей за прокат фильмов информацию по платежам, которые выполнялись в промежуток с 15 июня 2005 года по 18 июня 2005 года включительно и стоимость которых превышает 10.00. 
+Получите количество фильмов, продолжительность которых больше средней продолжительности всех фильмов.
+
 
 ```
-SELECT * FROM payment WHERE payment_date BETWEEN '2005-06-15' AND '2005-06-18' AND amount > 10.00;
+SELECT COUNT(*) AS count_of_records
+FROM film
+WHERE length > (SELECT AVG(length) FROM film);
+
 ```
 
 ### Задание 3.
 
-Получите последние пять аренд фильмов.
+Получите информацию, за какой месяц была получена наибольшая сумма платежей, и добавьте информацию по количеству аренд за этот месяц.
 
 ```
-SELECT * FROM `rental` ORDER BY `rental_date` DESC LIMIT 5;
+
+SELECT DATE_FORMAT(rental_date, '%Y-%m') AS rental_month, COUNT(rental_id) AS rental_count
+FROM rental
+WHERE DATE_FORMAT(rental_date, '%Y-%m') = 
+  (SELECT DATE_FORMAT(payment_date, '%Y-%m') AS max_payment_month
+   FROM payment
+   GROUP BY max_payment_month
+   HAVING SUM(amount) = (SELECT MAX(total_amount) FROM (
+     SELECT SUM(amount) AS total_amount
+     FROM payment
+     GROUP BY DATE_FORMAT(payment_date, '%Y-%m')
+   ) AS monthly_totals)
+  )
+GROUP BY rental_month;
+
 ```
 
-### Задание 4.
-
-Одним запросом получите активных покупателей, имена которых Kelly или Willie.
-
-Сформируйте вывод в результат таким образом:
-
-все буквы в фамилии и имени из верхнего регистра переведите в нижний регистр,
-замените буквы 'll' в именах на 'pp'.
-
-```
-SELECT LOWER(REPLACE(first_name,'LL','pp')) , LOWER(REPLACE(last_name,'LL','pp'))  FROM customer WHERE (first_name='kelly' OR first_name='willie') AND active ='1';
-```
-
-
- 
