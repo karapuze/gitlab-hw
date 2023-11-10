@@ -40,19 +40,13 @@ WHERE length > (SELECT AVG(length) FROM film);
 
 ```
 
-SELECT DATE_FORMAT(rental_date, '%Y-%m') AS rental_month, COUNT(rental_id) AS rental_count
-FROM rental
-WHERE DATE_FORMAT(rental_date, '%Y-%m') = 
-  (SELECT DATE_FORMAT(payment_date, '%Y-%m') AS max_payment_month
-   FROM payment
-   GROUP BY max_payment_month
-   HAVING SUM(amount) = (SELECT MAX(total_amount) FROM (
-     SELECT SUM(amount) AS total_amount
-     FROM payment
-     GROUP BY DATE_FORMAT(payment_date, '%Y-%m')
-   ) AS monthly_totals)
-  )
-GROUP BY rental_month;
-
+SELECT max_payment_month, COUNT(DISTINCT rental_id) AS unique_rental_count
+FROM (
+    SELECT DATE_FORMAT(payment_date, '%Y-%m') AS max_payment_month, rental_id
+    FROM payment
+) AS subquery
+GROUP BY max_payment_month
+ORDER BY unique_rental_count DESC
+LIMIT 1;
 ```
 
