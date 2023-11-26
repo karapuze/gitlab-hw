@@ -36,18 +36,25 @@ where date(p.payment_date) = '2005-07-30' and p.payment_date = r.rental_date and
 В оригинальном запросе отсутствует явное указание типа JOIN. В зависимости от контекста, это может привести к неявным LEFT JOIN или INNER JOIN. Рекомендуется всегда явно указывать тип JOIN для ясности.
 
 
+
+Создание индекса:
+```
+
+CREATE INDEX idx_payment_date ON payment(payment_date);
+```
 Оптимизированный запрос:
 ```
 EXPLAIN ANALYZE
-SELECT DISTINCT
-       CONCAT(c.last_name, ' ', c.first_name) AS customer_name,
-       SUM(p.amount) OVER (PARTITION BY c.customer_id, f.title) AS total_amount
+SELECT
+    CONCAT(c.last_name, ' ', c.first_name) AS customer_name,
+    SUM(p.amount) OVER (PARTITION BY c.customer_id, f.title) AS total_amount
 FROM payment p
 JOIN rental r ON p.payment_date = r.rental_date
 JOIN customer c ON r.customer_id = c.customer_id
 JOIN inventory i ON r.inventory_id = i.inventory_id
 JOIN film f ON i.film_id = f.film_id
-WHERE DATE(p.payment_date) = '2005-07-30';
+WHERE p.payment_date >= '2005-07-30'
+  AND p.payment_date < DATE_ADD('2005-07-30', INTERVAL 1 DAY);
 
 ```
 
