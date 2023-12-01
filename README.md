@@ -30,7 +30,11 @@
 ![Конфигурация](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202023-12-01%20в%2013.01.43.png)
 
 2. Статус master
+
+   
 ![master](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202023-12-01%20в%2013.00.48.png)
 
 3. Статус slave
+
+
 ![slave](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202023-12-01%20в%2013.00.30.png)
