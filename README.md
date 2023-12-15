@@ -18,6 +18,11 @@
 ![Network_Service1](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202023-12-15%20в%2015.42.10.png)
 
 
+2.1 https://www.exploit-db.com/exploits/49757
+2.2 https://www.exploit-db.com/exploits/19203
+2.3 https://www.exploit-db.com/exploits/13853
+
+
 ### Задание 2.
 
 1. Установите поддержку LUKS.
