@@ -35,7 +35,7 @@ sudo docker run -d     --name postgresql-instance     -v ./sql/data:/var/lib/pos
 
 ### Ответ 2. 
 
-1. ![Скриншот-1]([https://github.com/netology-code/sys-pattern-homework/blob/main/img/img15.png](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-02-04%20в%2008.56.49.png))
+1. ![Скриншот-1]([https://github.com/netology-code/sys-pattern-homework/blob/main/img/img15.png](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-02-04%20в%2008.56.49.png)
 
 ### Задание 3.
 
