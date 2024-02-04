@@ -81,6 +81,8 @@ SELECT COUNT(*) FROM orders;
 ```
 SELECT COUNT(*) FROM clients;
 ```
+![Скриншот-4](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-02-04%20в%2009.16.58.png)
+
 ### Задание 4.
 
 Вам дали задачу написать системное решение, основой которого бы послужили:
