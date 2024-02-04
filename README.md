@@ -42,6 +42,7 @@ sudo docker run -d     --name postgresql-instance     -v ./sql/data:/var/lib/pos
    SELECT grantee, privilege_type 
    FROM information_schema.table_privileges 
    WHERE table_schema = 'public' AND table_name IN ('orders', 'clients');
+   ```
 5. ![Скриншот-3](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-02-04%20в%2009.06.01.png)
 
 
