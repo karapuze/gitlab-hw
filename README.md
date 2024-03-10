@@ -1,17 +1,37 @@
-# Домашнее задание к занятию ««SQL»» - `Натетков Александр`
+# Домашнее задание к занятию 3. «MySQL» - `Натетков Александр`
 
 
 
 ### Задание 1. 
 
-Используя Docker, поднимите инстанс PostgreSQL (версию 12) c 2 volume, в который будут складываться данные БД и бэкапы.
-
-Приведите получившуюся команду или docker-compose-манифест.
+1. Найдите команду для выдачи статуса БД и приведите в ответе из её вывода версию сервера БД.
+2. Подключитесь к восстановленной БД и получите список таблиц из этой БД.
+3. Приведите в ответе количество записей с price > 300.
 
 ### Ответ 1. 
 
+1. \s Server version:		8.3.0 MySQL Community Server - GPL
+2.
 ```
-sudo docker run -d     --name postgresql-instance     -v ./sql/data:/var/lib/postgresql/data     -v ./sql/backups:/var/lib/postgresql/backups     -e POSTGRES_PASSWORD=mysecretpassword     -p 5432:5432     postgres:12
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_test_db |
++-------------------+
+| orders            |
++-------------------+
+1 row in set (0.01 sec)
+```
+3.
+```
+mysql> select count(*) as totalorders
+    -> from orders
+    -> where price > 300;
++-------------+
+| totalorders |
++-------------+
+|           1 |
++-------------+
+1 row in set (0.02 sec)
 ```
 
 
