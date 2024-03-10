@@ -10,7 +10,32 @@
 
 ### Ответ 1. 
 
-1. \s Server version:		8.3.0 MySQL Community Server - GPL
+1.
+```
+mysql> \s
+--------------
+mysql  Ver 8.3.0 for Linux on aarch64 (MySQL Community Server - GPL)
+
+Connection id:		12
+Current database:	test_db
+Current user:		root@localhost
+SSL:			Not in use
+Current pager:		stdout
+Using outfile:		''
+Using delimiter:	;
+Server version:		8.3.0 MySQL Community Server - GPL
+Protocol version:	10
+Connection:		Localhost via UNIX socket
+Server characterset:	utf8mb4
+Db     characterset:	utf8mb4
+Client characterset:	latin1
+Conn.  characterset:	latin1
+UNIX socket:		/var/run/mysqld/mysqld.sock
+Binary data as:		Hexadecimal
+Uptime:			40 min 30 sec
+
+Threads: 4  Questions: 108  Slow queries: 0  Opens: 196  Flush tables: 3  Open tables: 114  Queries per second avg: 0.044
+```
 2.
 ```
 mysql> SHOW TABLES;
