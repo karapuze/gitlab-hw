@@ -167,81 +167,60 @@ mysql> SHOW PROFILES;
 
 ### Задание 4.
 
-Часть пользователей из таблицы clients решили оформить заказы из таблицы orders.
+Изучите файл my.cnf в директории /etc/mysql.
 
-Используя foreign keys, свяжите записи из таблиц
+Измените его согласно ТЗ (движок InnoDB):
 
-Приведите SQL-запросы для выполнения этих операций.
-
-Приведите SQL-запрос для выдачи всех пользователей, которые совершили заказ, а также вывод этого запроса.
+ - скорость IO важнее сохранности данных;
+ - нужна компрессия таблиц для экономии места на диске;
+ - размер буффера с незакомиченными транзакциями 1 Мб;
+ - буффер кеширования 30% от ОЗУ;
+ - размер файла логов операций 100 Мб.
+Приведите в ответе изменённый файл my.cnf.
 
 ### Ответ 4.
 
 ```
-ALTER TABLE orders
-ADD COLUMN client_id INTEGER;
+[mysqld]
+
+default-storage-engine = InnoDB
+innodb_flush_log_at_trx_commit = 2
+
+#
+# Remove leading # and set to the amount of RAM for the most important data
+# cache in MySQL. Start at 70% of total RAM for dedicated server, else 10%.
+
+innodb_buffer_pool_size = 4800M
+#внутри контейнера после выполнения cat /proc/meminfo имеем MemTotal: 16380460 kB, выставляем 30% => 4 914 138kb => 4800M
+#
+innodb_file_per_table = 1
+innodb_page_compression = ON
+
+# Remove leading # to turn on a very important data integrity option: logging
+# changes to the binary log between backups.
+# log_bin
+#
+# Remove leading # to set options mainly useful for reporting servers.
+# The server defaults are faster for transactions and fast SELECTs.
+# Adjust sizes as needed, experiment to find the optimal values.
+# join_buffer_size = 128M
+# sort_buffer_size = 2M
+# read_rnd_buffer_size = 2M
+
+innodb_log_buffer_size = 1M
+innodb_log_file_size = 100M
+
+# Remove leading # to revert to previous value for default_authentication_plugin,
+# this will increase compatibility with older clients. For background, see:
+# https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_default_authentication_plugin
+# default-authentication-plugin=mysql_native_password
+skip-host-cache
+skip-name-resolve
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+secure-file-priv=/var/lib/mysql-files
+user=mysql
+
+pid-file=/var/run/mysqld/mysqld.pid
 ```
-```
-UPDATE orders
-SET client_id = (SELECT id FROM clients WHERE last_name = 'Иванов Иван Иванович')
-WHERE name = 'Книга';
-
-UPDATE orders
-SET client_id = (SELECT id FROM clients WHERE last_name = 'Петров Петр Петрович')
-WHERE name = 'Монитор';
-
-UPDATE orders
-SET client_id = (SELECT id FROM clients WHERE last_name = 'Иоганн Себастьян Бах')
-WHERE name = 'Гитара';
-```
-
-![Скриншот-5](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-02-04%20в%2009.19.56.png)
-
-### Задание 5. 
-Получите полную информацию по выполнению запроса выдачи всех пользователей из задачи 4 (используя директиву EXPLAIN).
-
-Приведите получившийся результат и объясните, что значат полученные значения.
-
-### Ответ 5.
-```
-EXPLAIN SELECT c.last_name
-FROM clients c
-WHERE c.id IN (SELECT client_id FROM orders);
-                             QUERY PLAN                              
----------------------------------------------------------------------
- Hash Semi Join  (cost=13.15..25.52 rows=100 width=516)
-   Hash Cond: (c.id = orders.client_id)
-   ->  Seq Scan on clients c  (cost=0.00..11.00 rows=100 width=520)
-   ->  Hash  (cost=11.40..11.40 rows=140 width=4)
-         ->  Seq Scan on orders  (cost=0.00..11.40 rows=140 width=4)
-(5 rows)
-```
-Этот вывод EXPLAIN предоставляет план выполнения запроса, включая информацию о том, как база данных будет извлекать и объединять данные для выполнения запроса.
-
-1. "Hash Semi Join" - это тип соединения используемый для объединения двух таблиц. 
-2. "cost=13.15..25.52 rows=100 width=516" - это оценка стоимости выполнения операции. 
-3. "Hash Cond: (c.id = orders.client_id)" - это условие объединения таблиц по значениям полей c.id и orders.client_id.
-4. "Seq Scan on clients c" - это операция последовательного сканирования таблицы clients для выполнения запроса.
-5. "Seq Scan on orders" - это операция последовательного сканирования таблицы orders для выполнения запроса.
-
-### Задание 6. 
-Создайте бэкап БД test_db и поместите его в volume, предназначенный для бэкапов (см. задачу 1).
-
-Остановите контейнер с PostgreSQL, но не удаляйте volumes.
-
-Поднимите новый пустой контейнер с PostgreSQL.
-
-Восстановите БД test_db в новом контейнере.
-
-Приведите список операций, который вы применяли для бэкапа данных и восстановления.
-
-### Ответ 6.
-
-1. ``` pg_dump test_db > /var/lib/postgresql/backups/backup.sql```
-2. ```sudo docker stop postgresql-instance```
-3. ```sudo docker run -d     --name postgresql-new     -v ./sql/data:/var/lib/postgresql/data     -v ./sql/backups:/var/lib/postgresql/backups     -e POSTGRES_PASSWORD=mysecretpassword     -p 5432:5432     postgres:12```
-4. ```docker exec -i postgresql-new psql -U postgres test_db < /var/lib/postgresql/backups/backup.sql```
-
-
-
 
