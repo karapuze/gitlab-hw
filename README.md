@@ -63,33 +63,54 @@ mysql> select count(*) as totalorders
 
 ### Задание 2.
 
-В БД из задачи 1:
+1. Создайте пользователя test в БД c паролем test-pass, используя:
 
-1. создайте пользователя test-admin-user и БД test_db;
-2. в БД test_db создайте таблицу orders и clients (спeцификация таблиц ниже);
-3. предоставьте привилегии на все операции пользователю test-admin-user на таблицы БД test_db;
-4. создайте пользователя test-simple-user;
-5. предоставьте пользователю test-simple-user права на SELECT/INSERT/UPDATE/DELETE этих таблиц БД test_db.
+плагин авторизации mysql_native_password
+срок истечения пароля — 180 дней
+количество попыток авторизации — 3
+максимальное количество запросов в час — 100
+аттрибуты пользователя:
+Фамилия "Pretty"
+Имя "James".
+Предоставьте привелегии пользователю test на операции SELECT базы test_db.
 
-Приведите:
+2. Используя таблицу INFORMATION_SCHEMA.USER_ATTRIBUTES, получите данные по пользователю test и приведите в ответе к задаче.
 
-1. итоговый список БД после выполнения пунктов выше;
-2. описание таблиц (describe);
-3. SQL-запрос для выдачи списка пользователей с правами над таблицами test_db;
-4. список пользователей с правами над таблицами test_db.
 
 ### Ответ 2. 
 
-1. ![Скриншот-1](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-02-04%20в%2008.56.49.png)
-2. ![Скриншот-2](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-02-04%20в%2009.02.00.png)
-3.
-    ```
-   SELECT grantee, privilege_type 
-   FROM information_schema.table_privileges 
-   WHERE table_schema = 'public' AND table_name IN ('orders', 'clients');
-   ```
-5. ![Скриншот-3](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-02-04%20в%2009.06.01.png)
+1.
+```
+mysql> create user 'test'@'localhost' identified with 'mysql_native_password' by 'test-pass';
+Query OK, 0 rows affected (2.51 sec)
 
+mysql> ALTER USER 'test'@'localhost' PASSWORD EXPIRE INTERVAL 180 DAY;
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> ALTER USER 'test'@'localhost' FAILED_LOGIN_ATTEMPTS 3;
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> ALTER USER 'test'@'localhost' WITH MAX_QUERIES_PER_HOUR 100;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> ALTER USER 'test'@'localhost' ATTRIBUTE '{"first_name": "James", "last_name": "Pretty"}';
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> GRANT SELECT ON test_db.* TO 'test'@'localhost';
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+```
+
+2.
+```
+mysql> SELECT * FROM INFORMATION_SCHEMA.USER_ATTRIBUTES WHERE USER = 'test';
++------+-----------+------------------------------------------------+
+| USER | HOST      | ATTRIBUTE                                      |
++------+-----------+------------------------------------------------+
+| test | localhost | {"last_name": "Pretty", "first_name": "James"} |
++------+-----------+------------------------------------------------+
+1 row in set (0.04 sec)
+
+```
 
 ### Задание 3.
 
