@@ -114,40 +114,56 @@ mysql> SELECT * FROM INFORMATION_SCHEMA.USER_ATTRIBUTES WHERE USER = 'test';
 
 ### Задание 3.
 
-Используя SQL-синтаксис, наполните таблицы следующими тестовыми данными, вычислите количество записей для каждой таблицы.
+1. Установите профилирование SET profiling = 1. Изучите вывод профилирования команд SHOW PROFILES;.
 
-Приведите в ответе:
+2. Исследуйте, какой engine используется в таблице БД test_db и приведите в ответе.
 
-- запросы,
-- результаты их выполнения.
+3. Измените engine и приведите время выполнения и запрос на изменения из профайлера в ответе:
+
+ - на MyISAM,
+ - на InnoDB.
 
 ### Ответ 3.
 
+1.
 ```
-INSERT INTO orders (name, price)
-VALUES 
-    ('Шоколад', 10),
-    ('Принтер', 3000),
-    ('Книга', 500),
-    ('Монитор', 7000),
-    ('Гитара', 4000);
+mysql> set profiling = 1;
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+mysql> show profiles;
+Empty set, 1 warning (0.00 sec)
 ```
+2.
 ```
-INSERT INTO clients (last_name, country)
-VALUES 
-    ('Иванов Иван Иванович', 'USA'),
-    ('Петров Петр Петрович', 'Canada'),
-    ('Иоганн Себастьян Бах', 'Japan'),
-    ('Ронни Джеймс Дио', 'Russia'),
-    ('Ritchie Blackmore', 'Russia');
+mysql> SELECT ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'test_db' AND TABLE_NAME = 'orders';
++--------+
+| ENGINE |
++--------+
+| InnoDB |
++--------+
+1 row in set (0.05 sec)
 ```
+3.
 ```
-SELECT COUNT(*) FROM orders;
+mysql> SHOW PROFILES;
++----------+------------+-------------------------------------------------------------------------------------------------------+
+| Query_ID | Duration   | Query                                                                                                 |
++----------+------------+-------------------------------------------------------------------------------------------------------+
+|        1 | 0.04362350 | SHOW TABLE STATUS LIKE 'orders'                                                                       |
+|        2 | 0.03890300 | SELECT ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'test_db' AND TABLE_NAME = 'orders' |
+|        3 | 0.06766800 | ALTER TABLE orders ENGINE=MyISAM                                                                      |
+|        4 | 0.02026725 | SELECT ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'test_db' AND TABLE_NAME = 'orders' |
+|        5 | 0.02621150 | SHOW TABLE STATUS LIKE 'orders'                                                                       |
+|        6 | 0.00330425 | SHOW TABLES                                                                                           |
+|        7 | 0.01382050 | SHOW * FROM orders                                                                                    |
+|        8 | 0.03136325 | SELECT * FROM orders                                                                                  |
+|        9 | 0.05882475 | ALTER TABLE orders ENGINE = InnoDB                                                                    |
+|       10 | 0.00129850 | SELECT * FROM orders                                                                                  |
+|       11 | 0.02413725 | SHOW TABLES                                                                                           |
+|       12 | 0.02502975 | SHOW TABLE STATUS LIKE 'orders'                                                                       |
++----------+------------+-------------------------------------------------------------------------------------------------------+
+12 rows in set, 1 warning (0.01 sec)
 ```
-```
-SELECT COUNT(*) FROM clients;
-```
-![Скриншот-4](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-02-04%20в%2009.16.58.png)
 
 ### Задание 4.
 
