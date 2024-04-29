@@ -2,7 +2,7 @@
 
 
 
-### Задание 1. 
+## Задание 1. 
 
 Сценарий выполнения задачи:
 
@@ -24,12 +24,12 @@ Hey, Netology
  - Предоставьте ответ в виде ссылки на https://hub.docker.com/<username_repo>/custom-nginx/general .
 
 
-### Ответ 1. 
+## Ответ 1. 
 
 https://hub.docker.com/repository/docker/karapuze/custom-nginx/general
 
 
-### Задание 2.
+## Задание 2.
 
 1. Запустите ваш образ custom-nginx:1.0.0 командой docker run в соответвии с требованиями:
  - имя контейнера "ФИО-custom-nginx-t2"
@@ -40,14 +40,14 @@ https://hub.docker.com/repository/docker/karapuze/custom-nginx/general
 4. Убедитесь с помощью curl или веб браузера, что индекс-страница доступна.
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод.
 
-### Ответ 2. 
+## Ответ 2. 
 
 ![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-23%20в%2008.47.38.png)
 
 ![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-23%20в%2008.47.56.png)
 
 
-### Задание 3.
+## Задание 3.
 
 1. Воспользуйтесь docker help или google, чтобы узнать как подключиться к стандартному потоку ввода/вывода/ошибок контейнера "custom-nginx-t2".
 2. Подключитесь к контейнеру и нажмите комбинацию Ctrl-C.
@@ -64,7 +64,7 @@ https://hub.docker.com/repository/docker/karapuze/custom-nginx/general
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод.
 
 
-### Ответ 3.
+## Ответ 3.
 
 1-6. ![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-24%20в%2015.07.36.png)
 
@@ -75,7 +75,7 @@ https://hub.docker.com/repository/docker/karapuze/custom-nginx/general
 10-11. ![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-24%20в%2015.14.44.png)
 
 
-### Задание 4.
+## Задание 4.
 
 1. Запустите первый контейнер из образа centos c любым тегом в фоновом режиме, подключив папку текущий рабочий каталог $(pwd) на хостовой машине в /data контейнера, используя ключ -v.
 2. Запустите второй контейнер из образа debian в фоновом режиме, подключив текущий рабочий каталог $(pwd) в /data контейнера.
@@ -85,13 +85,13 @@ https://hub.docker.com/repository/docker/karapuze/custom-nginx/general
 
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод.
 
-### Ответ 4.
+## Ответ 4.
 
  ![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-24%20в%2017.39.11.png)
 
-### Задание 5. 
+## Задание 5. 
 
-## 1.Создайте отдельную директорию(например /tmp/netology/docker/task5) и 2 файла внутри него. 
+### 1.Создайте отдельную директорию(например /tmp/netology/docker/task5) и 2 файла внутри него. 
 "compose.yaml" с содержимым:
 
 ``
@@ -119,7 +119,7 @@ services:
 ``    
 И выполните команду "docker compose up -d". Какой из файлов был запущен и почему?
 
-## 2.Отредактируйте файл compose.yaml так, чтобы были запущенны оба файла.
+### 2.Отредактируйте файл compose.yaml так, чтобы были запущенны оба файла.
 
 Выполните в консоли вашей хостовой ОС необходимые команды чтобы залить образ custom-nginx как custom-nginx:latest в запущенное вами, локальное registry. Дополнительная документация: https://distribution.github.io/distribution/about/deploying/
 
