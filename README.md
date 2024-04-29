@@ -162,6 +162,21 @@ services:
 7. После удаления compose.yml и выполнения docker compose up -d, получил предупреждение об "осиротевших" контейнерах, а именно portainer, было предложено выпонлить команду используя флаг --remove-orphans для удаления "осиротевших" контейнеров.
 ![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-29%20в%2012.38.51.png)
 
+Portainer с задеплоеным nginx
+![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-29%20в%2012.42.29.png)
 
-
+Compose.yml
+```
+version: "3"
+include:
+  - docker-compose.yaml
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    network_mode: host
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+```
 
