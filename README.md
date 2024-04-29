@@ -152,18 +152,16 @@ services:
 
 
 3. 
+ ![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-29%20в%2012.12.13.png)
 
+4. Было бы здорово если бы вы проверяли задачи, потому что по умолчанию необходимо использовать не https, а http
 
-4. 
+6.  
+![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-29%20в%2012.18.29.png)
 
+7. После удаления compose.yml и выполнения docker compose up -d, получил предупреждение об "осиротевших" контейнерах, а именно portainer, было предложено выпонлить команду используя флаг --remove-orphans для удаления "осиротевших" контейнеров.
+![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-29%20в%2012.38.51.png)
 
-5. 
-
-
-6. 
-
-
-7. 
 
 
 
