@@ -146,3 +146,24 @@ services:
 
 1. Был запущен compose.yml т.к. он считается предпочтительным, а docker-compose поддерживается для обратной совместимости.
  ![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-29%20в%2011.24.56.png)
+ 
+2. Добавил include
+ ![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-29%20в%2011.58.00.png)
+
+
+3. 
+
+
+4. 
+
+
+5. 
+
+
+6. 
+
+
+7. 
+
+
+
