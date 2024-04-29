@@ -145,4 +145,4 @@ services:
 ### Ответ 5.
 
 1. Был запущен compose.yml т.к. он считается предпочтительным, а docker-compose поддерживается для обратной совместимости.
- ![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-24%20в%2017.39.11.png)
+ ![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-29%20в%2011.24.56.png)
