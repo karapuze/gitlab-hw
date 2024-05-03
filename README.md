@@ -53,6 +53,8 @@ docker compose up -d
 ```
 Выдал права пользователю на запись в /opt
 
+#### fork-репозитория
+[Ссылка](https://github.com/karapuze/shvirtd-example-python)
 
 1-6. ![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-24%20в%2015.07.36.png)
 
