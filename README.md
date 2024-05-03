@@ -56,7 +56,6 @@ docker compose up -d
 
 [fork-репозитория](https://github.com/karapuze/shvirtd-example-python)
 
-Переменные не убирал в гитигнор, чтобы было видно для проверки задания
 
 
 ![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-05-03%20в%2017.31.04.png)
