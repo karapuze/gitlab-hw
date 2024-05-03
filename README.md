@@ -71,94 +71,13 @@ docker compose up -d
 
  ![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-05-03%20в%2019.02.28.png)
 
-## Задание 5. 
+ Соответсвенно бинарный файл это 1bac73626f1d4a031c8f5f3a90fcc46c6e6ae1ca2a9b8705119db5764ec714db
 
-1. Создайте отдельную директорию(например /tmp/netology/docker/task5) и 2 файла внутри него. 
-"compose.yaml" с содержимым:
+## Задание 6.1. 
 
-```
-version: "3"
-services:
-  portainer:
-    image: portainer/portainer-ce:latest
-    network_mode: host
-    ports:
-      - "9000:9000"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-```
+Добейтесь аналогичного результата, используя docker cp.
+Предоставьте скриншоты действий .
 
-"docker-compose.yaml" с содержимым:
-
-```
-version: "3"
-services:
-  registry:
-    image: registry:2
-    network_mode: host
-    ports:
-    - "5000:5000"
-```   
-И выполните команду "docker compose up -d". Какой из файлов был запущен и почему?
-
-2. Отредактируйте файл compose.yaml так, чтобы были запущенны оба файла.
-
-3. Выполните в консоли вашей хостовой ОС необходимые команды чтобы залить образ custom-nginx как custom-nginx:latest в запущенное вами, локальное registry. 
-
-4. Откройте страницу "https://127.0.0.1:9000" и произведите начальную настройку portainer.(логин и пароль адмнистратора)
-
-5. Откройте страницу "http://127.0.0.1:9000/#!/home", выберите ваше local окружение. Перейдите на вкладку "stacks" и в "web editor" задеплойте следующий компоуз:
-
-```
-version: '3'
-
-services:
-  nginx:
-    image: 127.0.0.1:5000/custom-nginx
-    ports:
-      - "9090:80"
-```
-6. Перейдите на страницу "http://127.0.0.1:9000/#!/2/docker/containers", выберите контейнер с nginx и нажмите на кнопку "inspect". В представлении <> Tree разверните поле "Config" и сделайте скриншот от поля "AppArmorProfile" до "Driver".
-
-7. Удалите любой из манифестов компоуза(например compose.yaml). Выполните команду "docker compose up -d". Прочитайте warning, объясните суть предупреждения и выполните предложенное действие. Погасите compose-проект ОДНОЙ(обязательно!!) командой.
-
-В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод, файл compose.yaml , скриншот portainer c задеплоенным компоузом.
-
-### Ответ 5.
-
-1. Был запущен compose.yml т.к. он считается предпочтительным, а docker-compose поддерживается для обратной совместимости.
- ![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-29%20в%2011.24.56.png)
- 
-2. Добавил include
- ![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-29%20в%2011.58.00.png)
-
-
-3. 
- ![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-29%20в%2012.12.13.png)
-
-4. Было бы здорово если бы вы проверяли задачи, потому что по умолчанию необходимо использовать не https, а http
-
-6.  
-![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-29%20в%2012.18.29.png)
-
-7. После удаления compose.yml и выполнения docker compose up -d, получил предупреждение об "осиротевших" контейнерах, а именно portainer, было предложено выпонлить команду используя флаг --remove-orphans для удаления "осиротевших" контейнеров.
-![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-29%20в%2012.38.51.png)
-
-Portainer с задеплоеным nginx
-![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-29%20в%2012.42.29.png)
-
-Compose.yml
-```
-version: "3"
-include:
-  - docker-compose.yaml
-services:
-  portainer:
-    image: portainer/portainer-ce:latest
-    network_mode: host
-    ports:
-      - "9000:9000"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-```
+### Ответ 6.1 .
+![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-05-03%20в%2019.20.16.png)
 
