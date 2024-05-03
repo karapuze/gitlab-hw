@@ -54,15 +54,11 @@ docker compose up -d
 Выдал права пользователю на запись в /opt
 
 
-[#### fork-репозитория](https://github.com/karapuze/shvirtd-example-python)
+[fork-репозитория](https://github.com/karapuze/shvirtd-example-python)
 
-1-6. ![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-24%20в%2015.07.36.png)
 
-Контейнер остановился т.к. в терминале был отправлен сигнал на завершение процесса.
+![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-05-03%20в%2017.31.04.png)
 
-7-9. ![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-24%20в%2015.09.13.png)
-
-10-11. ![Alt text](https://github.com/karapuze/gitlab-hw/blob/main/img/Снимок%20экрана%202024-04-24%20в%2015.14.44.png)
 
 
 ## Задание 4.
